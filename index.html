@@ -1,0 +1,2559 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta name="description"
+        content="Introduction to Programming - Learn computer programs, data, output, programming, programmers and programming languages.">
+
+    <title>Introduction to Programming</title>
+
+    <style>
+        /* =========================================================
+           ROOT / THEME
+        ========================================================= */
+
+        :root {
+            --primary: #3b82f6;
+            --primary-2: #06b6d4;
+            --primary-soft: rgba(59, 130, 246, 0.12);
+
+            --bg: #f4f7fb;
+            --surface: #ffffff;
+            --surface-2: #f8fafc;
+
+            --text: #172033;
+            --text-soft: #64748b;
+
+            --border: #e2e8f0;
+
+            --code-bg: #0f172a;
+            --code-text: #e2e8f0;
+            --code-keyword: #c084fc;
+            --code-string: #86efac;
+            --code-function: #67e8f9;
+            --code-comment: #94a3b8;
+
+            --success: #22c55e;
+            --danger: #ef4444;
+
+            --radius-sm: 10px;
+            --radius-md: 16px;
+            --radius-lg: 24px;
+
+            --shadow-sm:
+                0 4px 15px rgba(15, 23, 42, 0.06);
+
+            --shadow-md:
+                0 12px 35px rgba(15, 23, 42, 0.09);
+
+            --shadow-lg:
+                0 25px 60px rgba(15, 23, 42, 0.14);
+
+            --max-width: 1180px;
+
+            --transition: 0.3s ease;
+        }
+
+
+        /* =========================================================
+           DARK THEME
+        ========================================================= */
+
+        body.dark {
+            --bg: #070b14;
+            --surface: #101827;
+            --surface-2: #151f30;
+
+            --text: #f1f5f9;
+            --text-soft: #94a3b8;
+
+            --border: #243244;
+
+            --primary-soft: rgba(59, 130, 246, 0.14);
+
+            --shadow-sm:
+                0 5px 20px rgba(0, 0, 0, 0.22);
+
+            --shadow-md:
+                0 15px 40px rgba(0, 0, 0, 0.28);
+
+            --shadow-lg:
+                0 25px 70px rgba(0, 0, 0, 0.4);
+        }
+
+
+        /* =========================================================
+           RESET
+        ========================================================= */
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family:
+                Inter,
+                system-ui,
+                -apple-system,
+                BlinkMacSystemFont,
+                "Segoe UI",
+                sans-serif;
+
+            background: var(--bg);
+            color: var(--text);
+
+            line-height: 1.7;
+
+            transition:
+                background var(--transition),
+                color var(--transition);
+        }
+
+        img {
+            display: block;
+            width: 100%;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        button {
+            font: inherit;
+        }
+
+
+        /* =========================================================
+           PROGRESS BAR
+        ========================================================= */
+
+        .progress-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+
+            width: 0%;
+            height: 3px;
+
+            z-index: 3000;
+
+            background:
+                linear-gradient(
+                    90deg,
+                    var(--primary),
+                    var(--primary-2)
+                );
+        }
+
+
+        /* =========================================================
+           HEADER
+        ========================================================= */
+
+        header {
+            position: sticky;
+            top: 0;
+            z-index: 2000;
+
+            background:
+                color-mix(
+                    in srgb,
+                    var(--surface) 88%,
+                    transparent
+                );
+
+            backdrop-filter: blur(18px);
+            -webkit-backdrop-filter: blur(18px);
+
+            border-bottom:
+                1px solid var(--border);
+        }
+
+        .navbar {
+            width: min(
+                calc(100% - 32px),
+                var(--max-width)
+            );
+
+            min-height: 72px;
+
+            margin: auto;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+
+            font-weight: 850;
+            font-size: 1.15rem;
+        }
+
+        .logo-icon {
+            width: 36px;
+            height: 36px;
+
+            display: grid;
+            place-items: center;
+
+            color: white;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    var(--primary),
+                    var(--primary-2)
+                );
+
+            border-radius: 10px;
+
+            box-shadow:
+                0 7px 20px
+                rgba(59, 130, 246, 0.25);
+        }
+
+        .logo span {
+            color: var(--primary);
+        }
+
+        .nav-links {
+            display: none;
+            align-items: center;
+            gap: 24px;
+        }
+
+        .nav-links a {
+            position: relative;
+
+            color: var(--text-soft);
+
+            font-size: 0.9rem;
+            font-weight: 650;
+
+            transition: color var(--transition);
+        }
+
+        .nav-links a:hover,
+        .nav-links a.active {
+            color: var(--primary);
+        }
+
+        .nav-links a.active::after {
+            content: "";
+
+            position: absolute;
+
+            left: 0;
+            right: 0;
+            bottom: -9px;
+
+            height: 2px;
+
+            background: var(--primary);
+            border-radius: 5px;
+        }
+
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .icon-btn {
+            width: 40px;
+            height: 40px;
+
+            display: grid;
+            place-items: center;
+
+            border: 1px solid var(--border);
+            border-radius: 11px;
+
+            background: var(--surface);
+            color: var(--text);
+
+            cursor: pointer;
+
+            transition:
+                transform var(--transition),
+                border-color var(--transition);
+        }
+
+        .icon-btn:hover {
+            transform: translateY(-2px);
+            border-color: var(--primary);
+        }
+
+
+        /* =========================================================
+           HERO
+        ========================================================= */
+
+        .hero {
+            width: min(
+                calc(100% - 32px),
+                var(--max-width)
+            );
+
+            margin: auto;
+
+            min-height: 620px;
+
+            padding: 70px 0;
+
+            display: grid;
+            align-items: center;
+
+            gap: 40px;
+        }
+
+        .hero-content {
+            animation:
+                heroIn 0.8s ease both;
+        }
+
+        .eyebrow {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+
+            padding: 7px 13px;
+
+            color: var(--primary);
+
+            background: var(--primary-soft);
+
+            border:
+                1px solid
+                rgba(59, 130, 246, 0.15);
+
+            border-radius: 999px;
+
+            font-size: 0.78rem;
+            font-weight: 750;
+
+            margin-bottom: 20px;
+        }
+
+        .eyebrow-dot {
+            width: 7px;
+            height: 7px;
+
+            background: var(--success);
+
+            border-radius: 50%;
+
+            box-shadow:
+                0 0 0 4px
+                rgba(34, 197, 94, 0.12);
+        }
+
+        .hero h1 {
+            max-width: 750px;
+
+            font-size:
+                clamp(
+                    2.4rem,
+                    8vw,
+                    5rem
+                );
+
+            line-height: 1.02;
+
+            letter-spacing: -3px;
+
+            margin-bottom: 22px;
+        }
+
+        .gradient-text {
+            background:
+                linear-gradient(
+                    100deg,
+                    var(--primary),
+                    var(--primary-2)
+                );
+
+            -webkit-background-clip: text;
+            background-clip: text;
+
+            color: transparent;
+        }
+
+        .hero-description {
+            max-width: 680px;
+
+            color: var(--text-soft);
+
+            font-size: 1.05rem;
+
+            margin-bottom: 28px;
+        }
+
+        .hero-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        .btn {
+            min-height: 46px;
+
+            padding: 0 18px;
+
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+
+            border-radius: 12px;
+
+            border: 1px solid transparent;
+
+            font-size: 0.9rem;
+            font-weight: 750;
+
+            cursor: pointer;
+
+            transition:
+                transform var(--transition),
+                box-shadow var(--transition),
+                background var(--transition);
+        }
+
+        .btn-primary {
+            color: white;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    var(--primary),
+                    #2563eb
+                );
+
+            box-shadow:
+                0 10px 25px
+                rgba(37, 99, 235, 0.22);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+
+            box-shadow:
+                0 15px 30px
+                rgba(37, 99, 235, 0.3);
+        }
+
+        .btn-secondary {
+            background: var(--surface);
+            color: var(--text);
+
+            border-color: var(--border);
+        }
+
+        .btn-secondary:hover {
+            transform: translateY(-3px);
+
+            border-color: var(--primary);
+
+            box-shadow: var(--shadow-sm);
+        }
+
+
+        /* =========================================================
+           HERO CODE WINDOW
+        ========================================================= */
+
+        .code-window {
+            overflow: hidden;
+
+            border:
+                1px solid
+                rgba(255, 255, 255, 0.08);
+
+            border-radius: 20px;
+
+            background: var(--code-bg);
+
+            box-shadow: var(--shadow-lg);
+
+            animation:
+                heroIn 0.9s 0.15s ease both;
+        }
+
+        .window-header {
+            height: 48px;
+
+            padding: 0 16px;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            background: #111827;
+
+            border-bottom:
+                1px solid
+                rgba(255, 255, 255, 0.07);
+        }
+
+        .window-dots {
+            display: flex;
+            gap: 7px;
+        }
+
+        .window-dot {
+            width: 10px;
+            height: 10px;
+
+            border-radius: 50%;
+
+            background: #64748b;
+        }
+
+        .window-title {
+            color: #94a3b8;
+            font-size: 0.72rem;
+        }
+
+        .code-content {
+            padding: 24px 20px;
+
+            overflow-x: auto;
+        }
+
+        pre {
+            margin: 0;
+
+            color: var(--code-text);
+
+            font-family:
+                "Fira Code",
+                Consolas,
+                monospace;
+
+            font-size: 0.82rem;
+
+            line-height: 1.9;
+        }
+
+        .code-keyword {
+            color: var(--code-keyword);
+        }
+
+        .code-string {
+            color: var(--code-string);
+        }
+
+        .code-function {
+            color: var(--code-function);
+        }
+
+        .code-comment {
+            color: var(--code-comment);
+        }
+
+        .code-number {
+            color: #fbbf24;
+        }
+
+
+        /* =========================================================
+           MAIN
+        ========================================================= */
+
+        main {
+            width: min(
+                calc(100% - 32px),
+                var(--max-width)
+            );
+
+            margin: auto;
+        }
+
+        section {
+            scroll-margin-top: 100px;
+        }
+
+        .section {
+            padding: 60px 0;
+        }
+
+        .section-heading {
+            max-width: 700px;
+
+            margin-bottom: 30px;
+        }
+
+        .section-label {
+            color: var(--primary);
+
+            font-size: 0.78rem;
+            font-weight: 800;
+
+            text-transform: uppercase;
+            letter-spacing: 1.2px;
+
+            margin-bottom: 7px;
+        }
+
+        .section-heading h2 {
+            font-size:
+                clamp(
+                    1.8rem,
+                    5vw,
+                    2.7rem
+                );
+
+            line-height: 1.15;
+
+            letter-spacing: -1px;
+
+            margin-bottom: 10px;
+        }
+
+        .section-heading p {
+            color: var(--text-soft);
+        }
+
+
+        /* =========================================================
+           CONCEPT GRID
+        ========================================================= */
+
+        .concept-grid {
+            display: grid;
+
+            grid-template-columns: 1fr;
+
+            gap: 20px;
+        }
+
+        .card {
+            overflow: hidden;
+
+            background:
+                color-mix(
+                    in srgb,
+                    var(--surface) 90%,
+                    transparent
+                );
+
+            border:
+                1px solid
+                var(--border);
+
+            border-radius: var(--radius-md);
+
+            box-shadow: var(--shadow-sm);
+
+            transition:
+                transform var(--transition),
+                border-color var(--transition),
+                box-shadow var(--transition);
+        }
+
+        .card:hover {
+            transform: translateY(-6px);
+
+            border-color:
+                rgba(59, 130, 246, 0.35);
+
+            box-shadow: var(--shadow-md);
+        }
+
+        .card-image {
+            height: 190px;
+            overflow: hidden;
+        }
+
+        .card-image img {
+            width: 100%;
+            height: 100%;
+
+            object-fit: cover;
+
+            transition:
+                transform 0.6s ease;
+        }
+
+        .card:hover .card-image img {
+            transform: scale(1.06);
+        }
+
+        .card-body {
+            padding: 23px;
+        }
+
+        .card-number {
+            width: 38px;
+            height: 38px;
+
+            display: grid;
+            place-items: center;
+
+            margin-bottom: 15px;
+
+            background: var(--primary-soft);
+            color: var(--primary);
+
+            border-radius: 10px;
+
+            font-size: 0.82rem;
+            font-weight: 850;
+        }
+
+        .card h3 {
+            font-size: 1.2rem;
+            margin-bottom: 9px;
+        }
+
+        .card p {
+            color: var(--text-soft);
+            font-size: 0.93rem;
+        }
+
+        .card strong {
+            color: var(--text);
+        }
+
+
+        /* =========================================================
+           EXAMPLES
+        ========================================================= */
+
+        .example-box {
+            margin-top: 18px;
+
+            padding: 15px;
+
+            background: var(--surface-2);
+
+            border:
+                1px solid
+                var(--border);
+
+            border-radius: 12px;
+        }
+
+        .example-title {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+
+            color: var(--text);
+
+            font-size: 0.84rem;
+            font-weight: 800;
+
+            margin-bottom: 9px;
+        }
+
+        .example-title::before {
+            content: "✓";
+
+            width: 22px;
+            height: 22px;
+
+            display: grid;
+            place-items: center;
+
+            border-radius: 50%;
+
+            color: var(--success);
+
+            background:
+                rgba(34, 197, 94, 0.12);
+        }
+
+        .example-list {
+            display: grid;
+            gap: 6px;
+        }
+
+        .example-list li {
+            position: relative;
+
+            padding-left: 17px;
+
+            color: var(--text-soft);
+
+            font-size: 0.86rem;
+        }
+
+        .example-list li::before {
+            content: "";
+
+            position: absolute;
+
+            left: 0;
+            top: 10px;
+
+            width: 5px;
+            height: 5px;
+
+            background: var(--primary);
+
+            border-radius: 50%;
+        }
+
+
+        /* =========================================================
+           PROGRAMMING FLOW
+        ========================================================= */
+
+        .flow-card {
+            padding: 25px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    var(--surface),
+                    var(--surface-2)
+                );
+
+            border:
+                1px solid
+                var(--border);
+
+            border-radius: var(--radius-lg);
+
+            box-shadow: var(--shadow-md);
+        }
+
+        .flow {
+            display: grid;
+            gap: 12px;
+        }
+
+        .flow-item {
+            min-height: 100px;
+
+            padding: 18px;
+
+            display: flex;
+            align-items: center;
+            gap: 15px;
+
+            background: var(--surface);
+
+            border:
+                1px solid
+                var(--border);
+
+            border-radius: 14px;
+
+            transition:
+                transform var(--transition),
+                border-color var(--transition);
+        }
+
+        .flow-item:hover {
+            transform: translateX(5px);
+            border-color: var(--primary);
+        }
+
+        .flow-icon {
+            width: 45px;
+            height: 45px;
+
+            flex-shrink: 0;
+
+            display: grid;
+            place-items: center;
+
+            border-radius: 12px;
+
+            background: var(--primary-soft);
+            color: var(--primary);
+
+            font-weight: 850;
+        }
+
+        .flow-item h3 {
+            font-size: 1rem;
+            margin-bottom: 2px;
+        }
+
+        .flow-item p {
+            color: var(--text-soft);
+            font-size: 0.84rem;
+        }
+
+        .arrow {
+            display: none;
+            color: var(--primary);
+            font-weight: 900;
+        }
+
+
+        /* =========================================================
+           LANGUAGE SECTION
+        ========================================================= */
+
+        .language-layout {
+            display: grid;
+            gap: 25px;
+        }
+
+        .language-image {
+            overflow: hidden;
+
+            border-radius: var(--radius-lg);
+
+            box-shadow: var(--shadow-md);
+        }
+
+        .language-image img {
+            height: 280px;
+            object-fit: cover;
+
+            transition: transform 0.6s ease;
+        }
+
+        .language-image:hover img {
+            transform: scale(1.04);
+        }
+
+        .language-list {
+            display: grid;
+
+            grid-template-columns:
+                repeat(2, 1fr);
+
+            gap: 11px;
+
+            margin-top: 18px;
+        }
+
+        .language {
+            padding: 15px;
+
+            background: var(--surface);
+
+            border:
+                1px solid
+                var(--border);
+
+            border-radius: 12px;
+
+            color: var(--text);
+
+            font-weight: 750;
+
+            transition:
+                transform var(--transition),
+                border-color var(--transition),
+                color var(--transition);
+        }
+
+        .language:hover {
+            transform: translateY(-3px);
+
+            color: var(--primary);
+
+            border-color: var(--primary);
+        }
+
+
+        /* =========================================================
+           CODE EXAMPLE
+        ========================================================= */
+
+        .code-example {
+            overflow: hidden;
+
+            margin-top: 25px;
+
+            border-radius: var(--radius-md);
+
+            background: var(--code-bg);
+
+            box-shadow: var(--shadow-md);
+        }
+
+        .code-example-header {
+            min-height: 48px;
+
+            padding: 0 15px;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            border-bottom:
+                1px solid
+                rgba(255, 255, 255, 0.08);
+        }
+
+        .code-file {
+            color: #cbd5e1;
+            font-size: 0.78rem;
+        }
+
+        .copy-btn {
+            padding: 7px 11px;
+
+            border:
+                1px solid
+                rgba(255, 255, 255, 0.12);
+
+            border-radius: 8px;
+
+            background:
+                rgba(255, 255, 255, 0.06);
+
+            color: #cbd5e1;
+
+            cursor: pointer;
+
+            font-size: 0.72rem;
+
+            transition:
+                background var(--transition);
+        }
+
+        .copy-btn:hover {
+            background:
+                rgba(255, 255, 255, 0.12);
+        }
+
+
+        /* =========================================================
+           QUICK REVISION
+        ========================================================= */
+
+        .revision {
+            padding: 30px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #0f172a,
+                    #172554
+                );
+
+            color: white;
+
+            border-radius: var(--radius-lg);
+
+            box-shadow: var(--shadow-lg);
+        }
+
+        .revision h2 {
+            margin-bottom: 20px;
+        }
+
+        .revision-grid {
+            display: grid;
+
+            grid-template-columns: 1fr;
+
+            gap: 12px;
+        }
+
+        .revision-item {
+            padding: 16px;
+
+            background:
+                rgba(255, 255, 255, 0.07);
+
+            border:
+                1px solid
+                rgba(255, 255, 255, 0.09);
+
+            border-radius: 12px;
+        }
+
+        .revision-item strong {
+            display: block;
+
+            color: #93c5fd;
+
+            margin-bottom: 4px;
+        }
+
+        .revision-item span {
+            color: #cbd5e1;
+
+            font-size: 0.86rem;
+        }
+
+
+        /* =========================================================
+           FOOTER
+        ========================================================= */
+
+        footer {
+            margin-top: 70px;
+
+            padding: 35px 16px;
+
+            text-align: center;
+
+            background: var(--surface);
+
+            border-top:
+                1px solid
+                var(--border);
+        }
+
+        .footer-logo {
+            font-weight: 850;
+            font-size: 1.05rem;
+
+            margin-bottom: 5px;
+        }
+
+        .footer-text {
+            color: var(--text-soft);
+
+            font-size: 0.82rem;
+        }
+
+        .developer {
+            display: inline-block;
+
+            margin-top: 9px;
+
+            color: var(--primary);
+
+            font-size: 0.88rem;
+            font-weight: 800;
+
+            transition:
+                text-shadow var(--transition),
+                transform var(--transition);
+        }
+
+        .developer:hover {
+            transform: translateY(-2px);
+
+            text-shadow:
+                0 0 14px
+                rgba(59, 130, 246, 0.55);
+        }
+
+
+        /* =========================================================
+           SCROLL TOP
+        ========================================================= */
+
+        #scrollTop {
+            position: fixed;
+
+            right: 18px;
+            bottom: 18px;
+
+            width: 45px;
+            height: 45px;
+
+            display: grid;
+            place-items: center;
+
+            border: 0;
+            border-radius: 50%;
+
+            color: white;
+
+            background: var(--primary);
+
+            cursor: pointer;
+
+            box-shadow: var(--shadow-md);
+
+            opacity: 0;
+            visibility: hidden;
+
+            transform: translateY(10px);
+
+            transition:
+                opacity var(--transition),
+                visibility var(--transition),
+                transform var(--transition);
+        }
+
+        #scrollTop.show {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+
+        /* =========================================================
+           SCROLL REVEAL
+        ========================================================= */
+
+        .reveal {
+            opacity: 0;
+            transform: translateY(25px);
+
+            transition:
+                opacity 0.65s ease,
+                transform 0.65s ease;
+        }
+
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+
+        /* =========================================================
+           ANIMATION
+        ========================================================= */
+
+        @keyframes heroIn {
+
+            from {
+                opacity: 0;
+                transform: translateY(25px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+
+        /* =========================================================
+           TABLET
+        ========================================================= */
+
+        @media (min-width: 700px) {
+
+            .nav-links {
+                display: flex;
+            }
+
+            .hero {
+                grid-template-columns:
+                    1.05fr 0.95fr;
+            }
+
+            .hero h1 {
+                font-size: 4rem;
+            }
+
+            .concept-grid {
+                grid-template-columns:
+                    repeat(2, 1fr);
+            }
+
+            .flow {
+                grid-template-columns:
+                    1fr auto 1fr auto 1fr;
+
+                align-items: center;
+            }
+
+            .arrow {
+                display: block;
+            }
+
+            .language-layout {
+                grid-template-columns:
+                    0.9fr 1.1fr;
+
+                align-items: center;
+            }
+
+            .language-image img {
+                height: 350px;
+            }
+
+            .revision-grid {
+                grid-template-columns:
+                    repeat(2, 1fr);
+            }
+        }
+
+
+        /* =========================================================
+           DESKTOP
+        ========================================================= */
+
+        @media (min-width: 1000px) {
+
+            .hero {
+                min-height: 680px;
+            }
+
+            .hero h1 {
+                font-size: 5rem;
+            }
+
+            .concept-grid {
+                grid-template-columns:
+                    repeat(3, 1fr);
+            }
+
+            .card-image {
+                height: 210px;
+            }
+
+            .section {
+                padding: 75px 0;
+            }
+
+            .revision-grid {
+                grid-template-columns:
+                    repeat(4, 1fr);
+            }
+        }
+
+
+        /* =========================================================
+           REDUCED MOTION
+        ========================================================= */
+
+        @media (prefers-reduced-motion: reduce) {
+
+            *,
+            *::before,
+            *::after {
+                scroll-behavior: auto !important;
+                animation-duration: 0.01ms !important;
+                transition-duration: 0.01ms !important;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Reading progress -->
+    <div class="progress-bar" id="progressBar"></div>
+
+
+    <!-- =========================================================
+         HEADER
+    ========================================================= -->
+
+    <header>
+
+        <nav class="navbar">
+
+            <a href="#home" class="logo">
+
+                <span class="logo-icon">
+                    &lt;/&gt;
+                </span>
+
+                Programming<span>.</span>
+
+            </a>
+
+
+            <div class="nav-links">
+
+                <a href="#concepts" class="nav-link">
+                    Concepts
+                </a>
+
+                <a href="#programming" class="nav-link">
+                    Programming
+                </a>
+
+                <a href="#languages" class="nav-link">
+                    Languages
+                </a>
+
+            </div>
+
+
+            <div class="header-actions">
+
+                <button
+                    class="icon-btn"
+                    id="themeToggle"
+                    aria-label="Toggle dark mode"
+                    title="Toggle dark mode"
+                >
+                    ☾
+                </button>
+
+            </div>
+
+        </nav>
+
+    </header>
+
+
+    <!-- =========================================================
+         HERO
+    ========================================================= -->
+
+    <section class="hero" id="home">
+
+        <div class="hero-content">
+
+            <div class="eyebrow">
+
+                <span class="eyebrow-dot"></span>
+
+                DIT Programming Notes
+
+            </div>
+
+
+            <h1>
+
+                Introduction to
+
+                <span class="gradient-text">
+                    Programming
+                </span>
+
+            </h1>
+
+
+            <p class="hero-description">
+
+                Learn the fundamental concepts of computer
+                programs, data, output, computer programming,
+                programmers, and programming languages through
+                simple explanations and practical examples.
+
+            </p>
+
+
+            <div class="hero-buttons">
+
+                <a
+                    href="#concepts"
+                    class="btn btn-primary"
+                >
+                    Start Learning →
+                </a>
+
+                <a
+                    href="#languages"
+                    class="btn btn-secondary"
+                >
+                    Explore Languages
+                </a>
+
+            </div>
+
+        </div>
+
+
+        <!-- Programming code window -->
+
+        <div class="code-window">
+
+            <div class="window-header">
+
+                <div class="window-dots">
+
+                    <span class="window-dot"></span>
+                    <span class="window-dot"></span>
+                    <span class="window-dot"></span>
+
+                </div>
+
+                <span class="window-title">
+                    introduction.py
+                </span>
+
+                <span></span>
+
+            </div>
+
+
+            <div class="code-content">
+
+<pre><span class="code-comment"># My first programming concept</span>
+
+<span class="code-keyword">name</span> =
+<span class="code-string">"Ahad"</span>
+
+<span class="code-keyword">age</span> =
+<span class="code-number">18</span>
+
+<span class="code-function">print</span>(
+    <span class="code-string">"Welcome to Programming!"</span>
+)
+
+<span class="code-comment"># Input → Process → Output</span></pre>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================================================
+         MAIN
+    ========================================================= -->
+
+    <main>
+
+
+        <!-- =====================================================
+             BASIC CONCEPTS
+        ====================================================== -->
+
+        <section
+            class="section"
+            id="concepts"
+        >
+
+            <div class="section-heading">
+
+                <div class="section-label">
+                    01 — Fundamentals
+                </div>
+
+                <h2>
+                    Basic Computer Concepts
+                </h2>
+
+                <p>
+                    These concepts provide the foundation for
+                    understanding how computer programs work.
+                </p>
+
+            </div>
+
+
+            <div class="concept-grid">
+
+
+                <!-- COMPUTER PROGRAM -->
+
+                <article class="card reveal">
+
+                    <div class="card-image">
+
+                        <img
+                            src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&w=1200&q=85"
+                            alt="Computer code displayed on a monitor"
+                            loading="lazy"
+                        >
+
+                    </div>
+
+
+                    <div class="card-body">
+
+                        <div class="card-number">
+                            01
+                        </div>
+
+                        <h3>
+                            Computer Program
+                        </h3>
+
+                        <p>
+                            The set of instructions given to a
+                            computer to perform a specific task
+                            is known as a
+                            <strong>Computer Program</strong>
+                            or <strong>Software</strong>.
+                        </p>
+
+
+                        <div class="example-box">
+
+                            <div class="example-title">
+                                Examples
+                            </div>
+
+                            <ul class="example-list">
+
+                                <li>
+                                    Visual Studio Code
+                                </li>
+
+                                <li>
+                                    Windows
+                                </li>
+
+                                <li>
+                                    Microsoft Office
+                                </li>
+
+                                <li>
+                                    Google Chrome
+                                </li>
+
+                            </ul>
+
+                        </div>
+
+                    </div>
+
+                </article>
+
+
+                <!-- DATA -->
+
+                <article class="card reveal">
+
+                    <div class="card-image">
+
+                        <img
+                            src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=1200&q=85"
+                            alt="Technology data visualization on a computer"
+                            loading="lazy"
+                        >
+
+                    </div>
+
+
+                    <div class="card-body">
+
+                        <div class="card-number">
+                            02
+                        </div>
+
+                        <h3>
+                            Data
+                        </h3>
+
+                        <p>
+                            <strong>Data</strong> are the facts
+                            and figures that are collected,
+                            stored, and processed by computers.
+                        </p>
+
+
+                        <div class="example-box">
+
+                            <div class="example-title">
+                                Examples
+                            </div>
+
+                            <ul class="example-list">
+
+                                <li>
+                                    25
+                                </li>
+
+                                <li>
+                                    Ali
+                                </li>
+
+                                <li>
+                                    Pass
+                                </li>
+
+                            </ul>
+
+                        </div>
+
+                    </div>
+
+                </article>
+
+
+                <!-- OUTPUT -->
+
+                <article class="card reveal">
+
+                    <div class="card-image">
+
+                        <img
+                            src="https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=1200&q=85"
+                            alt="Computer technology and digital output"
+                            loading="lazy"
+                        >
+
+                    </div>
+
+
+                    <div class="card-body">
+
+                        <div class="card-number">
+                            03
+                        </div>
+
+                        <h3>
+                            Output
+                        </h3>
+
+                        <p>
+                            <strong>Output</strong> is the
+                            processed result produced by a
+                            computer after working on the
+                            <strong>input data</strong>.
+                        </p>
+
+
+                        <div class="example-box">
+
+                            <div class="example-title">
+                                Examples
+                            </div>
+
+                            <ul class="example-list">
+
+                                <li>
+                                    A printed result card
+                                </li>
+
+                                <li>
+                                    Text message shown on a screen
+                                </li>
+
+                            </ul>
+
+                        </div>
+
+                    </div>
+
+                </article>
+
+            </div>
+
+        </section>
+
+
+        <!-- =====================================================
+             INPUT / PROCESS / OUTPUT
+        ====================================================== -->
+
+        <section class="section">
+
+            <div class="section-heading">
+
+                <div class="section-label">
+                    Computer Processing
+                </div>
+
+                <h2>
+                    How a Computer Works
+                </h2>
+
+                <p>
+                    A simple way to understand the relationship
+                    between input, processing, and output.
+                </p>
+
+            </div>
+
+
+            <div class="flow-card reveal">
+
+                <div class="flow">
+
+                    <div class="flow-item">
+
+                        <div class="flow-icon">
+                            01
+                        </div>
+
+                        <div>
+
+                            <h3>
+                                Input
+                            </h3>
+
+                            <p>
+                                Data is entered into the computer.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="arrow">
+                        →
+                    </div>
+
+
+                    <div class="flow-item">
+
+                        <div class="flow-icon">
+                            02
+                        </div>
+
+                        <div>
+
+                            <h3>
+                                Processing
+                            </h3>
+
+                            <p>
+                                The computer processes the data.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="arrow">
+                        →
+                    </div>
+
+
+                    <div class="flow-item">
+
+                        <div class="flow-icon">
+                            03
+                        </div>
+
+                        <div>
+
+                            <h3>
+                                Output
+                            </h3>
+
+                            <p>
+                                The processed result is produced.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =====================================================
+             PROGRAMMING
+        ====================================================== -->
+
+        <section
+            class="section"
+            id="programming"
+        >
+
+            <div class="section-heading">
+
+                <div class="section-label">
+                    02 — Programming
+                </div>
+
+                <h2>
+                    Programming Fundamentals
+                </h2>
+
+                <p>
+                    Understand programming, programmers, and
+                    the languages used to create software.
+                </p>
+
+            </div>
+
+
+            <div class="concept-grid">
+
+
+                <!-- COMPUTER PROGRAMMING -->
+
+                <article class="card reveal">
+
+                    <div class="card-image">
+
+                        <img
+                            src="https://images.unsplash.com/photo-1461749280684-dccba630e2f6?auto=format&fit=crop&w=1200&q=85"
+                            alt="Developer writing computer code"
+                            loading="lazy"
+                        >
+
+                    </div>
+
+
+                    <div class="card-body">
+
+                        <div class="card-number">
+                            04
+                        </div>
+
+                        <h3>
+                            Computer Programming
+                        </h3>
+
+                        <p>
+                            The process of writing, feeding,
+                            or storing a set of instructions
+                            in a computer is known as
+                            <strong>Computer Programming</strong>.
+                        </p>
+
+                    </div>
+
+                </article>
+
+
+                <!-- PROGRAMMER -->
+
+                <article class="card reveal">
+
+                    <div class="card-image">
+
+                        <img
+                            src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=1200&q=85"
+                            alt="Developer working at a computer"
+                            loading="lazy"
+                        >
+
+                    </div>
+
+
+                    <div class="card-body">
+
+                        <div class="card-number">
+                            05
+                        </div>
+
+                        <h3>
+                            Programmer
+                        </h3>
+
+                        <p>
+                            A person who knows how to correctly
+                            write computer programs is known as
+                            a <strong>Programmer</strong>.
+                        </p>
+
+                    </div>
+
+                </article>
+
+
+                <!-- PROGRAMMING LANGUAGE -->
+
+                <article class="card reveal">
+
+                    <div class="card-image">
+
+                        <img
+                            src="https://images.unsplash.com/photo-1515879218367-8466d910aaa4?auto=format&fit=crop&w=1200&q=85"
+                            alt="Programming code on laptop screen"
+                            loading="lazy"
+                        >
+
+                    </div>
+
+
+                    <div class="card-body">
+
+                        <div class="card-number">
+                            06
+                        </div>
+
+                        <h3>
+                            Programming Language
+                        </h3>
+
+                        <p>
+                            Computer programs are written using
+                            programming languages. These languages
+                            provide instructions that computers
+                            can process.
+                        </p>
+
+                    </div>
+
+                </article>
+
+            </div>
+
+
+            <!-- Interactive code example -->
+
+            <div class="code-example reveal">
+
+                <div class="code-example-header">
+
+                    <span class="code-file">
+                        simple-program.py
+                    </span>
+
+                    <button
+                        class="copy-btn"
+                        data-copy="name = &quot;Ahad&quot;
+age = 18
+
+print(&quot;Welcome to Programming!&quot;)"
+                    >
+                        Copy Code
+                    </button>
+
+                </div>
+
+
+                <div class="code-content">
+
+<pre><span class="code-keyword">name</span> =
+<span class="code-string">"Ahad"</span>
+
+<span class="code-keyword">age</span> =
+<span class="code-number">18</span>
+
+<span class="code-function">print</span>(
+    <span class="code-string">"Welcome to Programming!"</span>
+)</pre>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =====================================================
+             PROGRAMMING LANGUAGES
+        ====================================================== -->
+
+        <section
+            class="section"
+            id="languages"
+        >
+
+            <div class="section-heading">
+
+                <div class="section-label">
+                    03 — Languages
+                </div>
+
+                <h2>
+                    Programming Languages
+                </h2>
+
+                <p>
+                    Programming languages allow programmers
+                    to create software and give instructions
+                    to computers.
+                </p>
+
+            </div>
+
+
+            <div class="language-layout">
+
+
+                <div class="language-image reveal">
+
+                    <img
+                        src="https://images.unsplash.com/photo-1517694712202-14dd9538aa97?auto=format&fit=crop&w=1200&q=85"
+                        alt="Laptop displaying programming code"
+                        loading="lazy"
+                    >
+
+                </div>
+
+
+                <div class="card reveal">
+
+                    <div class="card-body">
+
+                        <h3>
+                            Examples of Programming Languages
+                        </h3>
+
+                        <p>
+                            Some commonly known programming
+                            languages include:
+                        </p>
+
+
+                        <div class="language-list">
+
+                            <div class="language">
+                                C
+                            </div>
+
+                            <div class="language">
+                                C++
+                            </div>
+
+                            <div class="language">
+                                C#
+                            </div>
+
+                            <div class="language">
+                                Python
+                            </div>
+
+                            <div class="language">
+                                Java
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =====================================================
+             QUICK REVISION
+        ====================================================== -->
+
+        <section class="section">
+
+            <div class="revision reveal">
+
+                <h2>
+                    Quick Revision
+                </h2>
+
+
+                <div class="revision-grid">
+
+                    <div class="revision-item">
+
+                        <strong>
+                            Computer Program
+                        </strong>
+
+                        <span>
+                            A set of instructions used to
+                            perform a specific task.
+                        </span>
+
+                    </div>
+
+
+                    <div class="revision-item">
+
+                        <strong>
+                            Data
+                        </strong>
+
+                        <span>
+                            Facts and figures collected,
+                            stored, and processed.
+                        </span>
+
+                    </div>
+
+
+                    <div class="revision-item">
+
+                        <strong>
+                            Output
+                        </strong>
+
+                        <span>
+                            The processed result produced
+                            by a computer.
+                        </span>
+
+                    </div>
+
+
+                    <div class="revision-item">
+
+                        <strong>
+                            Programmer
+                        </strong>
+
+                        <span>
+                            A person who writes computer
+                            programs.
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <!-- =========================================================
+         FOOTER
+    ========================================================= -->
+
+    <footer>
+
+        <div class="footer-logo">
+            Introduction to Programming
+        </div>
+
+        <p class="footer-text">
+            Clean and student-friendly computer science study notes.
+        </p>
+
+        <a
+            href="#home"
+            class="developer"
+        >
+            Developed by Ahad Ali Nisar
+        </a>
+
+    </footer>
+
+
+    <!-- Scroll top -->
+
+    <button
+        id="scrollTop"
+        aria-label="Scroll to top"
+        title="Back to top"
+    >
+        ↑
+    </button>
+
+
+    <!-- =========================================================
+         JAVASCRIPT
+    ========================================================= -->
+
+    <script>
+
+        "use strict";
+
+
+        /* =====================================================
+           DARK MODE
+        ===================================================== */
+
+        const themeToggle =
+            document.getElementById("themeToggle");
+
+
+        const savedTheme =
+            localStorage.getItem("programming-theme");
+
+
+        if (savedTheme === "dark") {
+
+            document.body.classList.add("dark");
+
+            themeToggle.textContent = "☀";
+
+        }
+
+
+        themeToggle.addEventListener(
+            "click",
+            () => {
+
+                document.body.classList.toggle("dark");
+
+
+                const isDark =
+                    document.body.classList.contains("dark");
+
+
+                themeToggle.textContent =
+                    isDark ? "☀" : "☾";
+
+
+                localStorage.setItem(
+                    "programming-theme",
+                    isDark ? "dark" : "light"
+                );
+
+            }
+        );
+
+
+        /* =====================================================
+           READING PROGRESS
+        ===================================================== */
+
+        const progressBar =
+            document.getElementById("progressBar");
+
+
+        window.addEventListener(
+            "scroll",
+            () => {
+
+                const scrollTop =
+                    window.scrollY;
+
+
+                const pageHeight =
+                    document.documentElement.scrollHeight -
+                    window.innerHeight;
+
+
+                const progress =
+                    pageHeight > 0
+                        ? (scrollTop / pageHeight) * 100
+                        : 0;
+
+
+                progressBar.style.width =
+                    `${progress}%`;
+
+            },
+            { passive: true }
+        );
+
+
+        /* =====================================================
+           SCROLL TO TOP
+        ===================================================== */
+
+        const scrollTopButton =
+            document.getElementById("scrollTop");
+
+
+        window.addEventListener(
+            "scroll",
+            () => {
+
+                if (window.scrollY > 450) {
+
+                    scrollTopButton.classList.add(
+                        "show"
+                    );
+
+                } else {
+
+                    scrollTopButton.classList.remove(
+                        "show"
+                    );
+
+                }
+
+            },
+            { passive: true }
+        );
+
+
+        scrollTopButton.addEventListener(
+            "click",
+            () => {
+
+                window.scrollTo({
+                    top: 0,
+                    behavior: "smooth"
+                });
+
+            }
+        );
+
+
+        /* =====================================================
+           SCROLL REVEAL
+        ===================================================== */
+
+        const revealElements =
+            document.querySelectorAll(".reveal");
+
+
+        const revealObserver =
+            new IntersectionObserver(
+                (entries, observer) => {
+
+                    entries.forEach(
+                        (entry) => {
+
+                            if (
+                                entry.isIntersecting
+                            ) {
+
+                                entry.target.classList.add(
+                                    "visible"
+                                );
+
+                                observer.unobserve(
+                                    entry.target
+                                );
+
+                            }
+
+                        }
+                    );
+
+                },
+                {
+                    threshold: 0.12
+                }
+            );
+
+
+        revealElements.forEach(
+            (element) => {
+
+                revealObserver.observe(
+                    element
+                );
+
+            }
+        );
+
+
+        /* =====================================================
+           COPY CODE
+        ===================================================== */
+
+        const copyButtons =
+            document.querySelectorAll(
+                ".copy-btn"
+            );
+
+
+        copyButtons.forEach(
+            (button) => {
+
+                button.addEventListener(
+                    "click",
+                    async () => {
+
+                        const code =
+                            button.dataset.copy;
+
+
+                        try {
+
+                            await navigator.clipboard.writeText(
+                                code
+                            );
+
+
+                            const originalText =
+                                button.textContent;
+
+
+                            button.textContent =
+                                "✓ Copied!";
+
+
+                            setTimeout(
+                                () => {
+
+                                    button.textContent =
+                                        originalText;
+
+                                },
+                                1600
+                            );
+
+                        } catch (error) {
+
+                            button.textContent =
+                                "Copy failed";
+
+                            setTimeout(
+                                () => {
+
+                                    button.textContent =
+                                        "Copy Code";
+
+                                },
+                                1600
+                            );
+
+                        }
+
+                    }
+                );
+
+            }
+        );
+
+
+        /* =====================================================
+           ACTIVE NAVIGATION
+        ===================================================== */
+
+        const navLinks =
+            document.querySelectorAll(
+                ".nav-link"
+            );
+
+
+        const trackedSections =
+            document.querySelectorAll(
+                "#concepts, #programming, #languages"
+            );
+
+
+        window.addEventListener(
+            "scroll",
+            () => {
+
+                let current = "";
+
+
+                trackedSections.forEach(
+                    (section) => {
+
+                        const sectionTop =
+                            section.offsetTop - 150;
+
+
+                        if (
+                            window.scrollY >=
+                            sectionTop
+                        ) {
+
+                            current =
+                                section.id;
+
+                        }
+
+                    }
+                );
+
+
+                navLinks.forEach(
+                    (link) => {
+
+                        link.classList.remove(
+                            "active"
+                        );
+
+
+                        if (
+                            link.getAttribute(
+                                "href"
+                            ) === `#${current}`
+                        ) {
+
+                            link.classList.add(
+                                "active"
+                            );
+
+                        }
+
+                    }
+                );
+
+            },
+            { passive: true }
+        );
+
+
+        /* =====================================================
+           CONSOLE MESSAGE
+        ===================================================== */
+
+        console.log(
+            "Introduction to Programming | Developed by Ahad Ali Nisar"
+        );
+
+    </script>
+
+</body>
+</html>
